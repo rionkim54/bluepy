@@ -93,6 +93,16 @@ struct discover_desc {
 	void *user_data;
 };
 
+static inline void bswap_128(const void *src, void *dst)
+{
+	const uint8_t *s = (const uint8_t *) src;
+	uint8_t *d = (uint8_t *) dst;
+	int i;
+
+	for (i = 0; i < 16; i++)
+		d[15 - i] = s[i];
+}
+
 static void discover_primary_unref(void *data)
 {
 	struct discover_primary *dp = data;
